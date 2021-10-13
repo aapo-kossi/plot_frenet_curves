@@ -10,7 +10,7 @@ Python script that draws 3d curves with user-defined curvature and torsion. Easy
 1. Make sure you have [python 3.X](https://www.python.org/downloads/) installed
 2. Download the code from this repository from the "download ZIP" button in the top right part of the repository front page  
     1. Unzip the download into your desired folder
-2. **Optional** Create a new [virtual environment](https://docs.python.org/3/tutorial/venv.html) to run the script in isolation from other projects
+2. **Optional**: Create a new [virtual environment](https://docs.python.org/3/tutorial/venv.html) to run the script in isolation from other projects
     1. Open a command terminal (for UNIX-based systems this guide assumes bash as the terminal, not csh or fish!)
     2. run the command `python -m venv [c:/path/to/your/desired/folder]`  
     3. activate the new environment by running `source [path to venv specified before]/activate`  
