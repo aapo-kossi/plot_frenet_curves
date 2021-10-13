@@ -40,7 +40,7 @@ You can also ensure the curve is not distorted by different scales on the x, y a
 by specifying the argument `--equal_scaling`.
 
 ## Examples
-input:  
+input:
 `python plot_from_k_and_t.py 1 --tau 0.25 --equal_scaling`  
 output:  
 ![helix1](https://user-images.githubusercontent.com/81294037/137204561-6ed2f864-a7ef-423b-8775-287aba4b8b86.png)  
@@ -48,7 +48,7 @@ input:
 `python plot_from_k_and_t.py s_`  
 output:  
 ![eulerspiral1](https://user-images.githubusercontent.com/81294037/137204859-c1063cc9-07a3-4453-9317-bc238e9e5860.png)  
-input:  
+input:
 `python plot_from_k_and_t.py 10*np.sin(np.exp(s_)/5) --tau abs(s_) --limits -5 5`  
 output:  
 ![weirdcurve](https://user-images.githubusercontent.com/81294037/137205925-c884ceac-78af-4c3e-b14e-ce77f490f9ea.png)
