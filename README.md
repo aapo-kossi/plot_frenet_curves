@@ -24,11 +24,26 @@ Python script that draws 3d curves with user-defined curvature and torsion. Easy
  and running `python plot_from_k_and_t.py --help`
 
 ## Usage
-the script has one required argument, which is the curvature of the curve *u(s)* at point *s*.  
-This argument must be specified first after the name of the script, before optional arguments.  
+To run the program using command line terminal (for example bash for UNIX-based systems,  
+such as MacOS of LINUX or the command prompt for Windows) you must first navigate  
+to the script location with the command `cd [path to script folder]`, and run the script  
+with the command `python plot_from_k_and_t.py [arguments]`, where you define the plotted curve  
+with arguments as follows:  
+
+The first argument is required as it defines the curvature of the curve *u(s)* at point *s*.  
+This argument must be specified immediately after the name of the script, before any optional arguments.  
 The curvature can be written using python multiplication (\*), division (/), exponent (\*\*) and  
 sum (+ or -). As the parameter for curvature and torsion, always use `s_`,  
-which will also be the resulting curve length.  
+which will also be the resulting curve length. An example using only the required argument is  
+`python plot_from_k_and_t.py (1+s_)**-1-1/10*(0.1+(15-s_)**2)**-0.5`,  
+for which the resulting plot resembles a cresting wave. Note that you cannot use whitespace inside your arguments,  
+as argparse interprets it as a delimiter between different arguments. You can also note that even though  
+the curvature explodes near *s = -1*, the script successfully plots a curve. This behaviour allows more freedom  
+to the user, but care must be taken as the resulting curves cannot be accurate in cases where kappa or tau are  
+badly defined. Moreover, in contrast to the true Frenet frame this script can calculate paths  
+with 0 and negative curvatures successfully, but the resulting plots cannot be guaranteed to represent  
+anything meaningful (do they really?).  
+**If the user desires to approximate an actual Frenet frame, they need to ensure that the curvature satisfies kappa > 0.**  
 Additionally you can use [mathematical functions defined by numpy](https://numpy.org/doc/stable/reference/routines.math.html)  
 by typing `np.[function]([input expressions])`, for example `np.sin(10*s_)`.  
 The most important optional argument is `--tau`, torsion of the curve at point *s*. When specifying  
