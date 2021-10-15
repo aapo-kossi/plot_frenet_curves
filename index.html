@@ -1,0 +1,81 @@
+<meta name="google-site-verification" content="t8EDMGBNNy-MvrKfQYATEWsm6GN9d6ppCSiL7BhSpjQ" />
+<h1 id="plot_frenet_curves">plot_frenet_curves</h1>
+<p>Python script that draws 3d curves with user-defined curvature and torsion. Easy to use from a command terminal with the help of python argparser.</p>
+<h2 id="built-with">Built with</h2>
+<ul>
+<li><a href="https://www.python.org/">python 3.8.8</a></li>
+<li><a href="https://numpy.org/">numpy 1.19.2</a></li>
+<li><a href="https://matplotlib.org/">matplotlib 3.3.1</a></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Make sure you have <a href="https://www.python.org/downloads/">python 3.X</a> installed</li>
+<li>Download the code from this repository from the &quot;download ZIP&quot; button in the top right part of the repository front page
+<ol>
+<li>Unzip the download into your desired folder</li>
+</ol>
+</li>
+<li><strong>Optional</strong>: Create a new <a href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> to run the script in isolation from other projects
+<ol>
+<li>Open a command terminal (for UNIX-based systems this guide assumes bash as the terminal, not csh or fish!)</li>
+<li>run the command <code>python -m venv [c:/path/to/your/desired/folder]</code></li>
+<li>activate the new environment by running <code>source [path to venv specified before]/activate</code>
+<ol>
+<li>Note: for Windows you need to run <code>activate.bat</code> if using a command terminal or <code>activate.ps1</code> for powershell</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Install Numpy and Matplotlib
+<ol>
+<li>This is done easiest using pip, the package installer included with python starting from version 3.4</li>
+<li>run the command <code>pip install numpy</code> in a command terminal, if using a venv make sure you have activated it</li>
+<li>run the command <code>pip install matplotlib</code></li>
+</ol>
+</li>
+<li>You're ready to go! view the help message for the plotting script<br />
+by navigating to the script location in your command terminal using <code>cd [c:/path/to/target]</code><br />
+and running <code>python plot_from_k_and_t.py --help</code></li>
+</ol>
+<h2 id="usage">Usage</h2>
+<p>To run the program using command line terminal (for example bash for UNIX-based systems,<br />
+such as MacOS of LINUX or the command prompt for Windows) you must first navigate<br />
+to the script location with the command <code>cd [path to script folder]</code>, and run the script<br />
+with the command <code>python plot_from_k_and_t.py [arguments]</code>, where you define the plotted curve<br />
+with arguments as follows:</p>
+<p>The first argument is required as it defines the curvature of the curve <em>u(s)</em> at point <em>s</em>.<br />
+This argument must be specified immediately after the name of the script, before any optional arguments.<br />
+The curvature can be written using python multiplication (*), division (/), exponent (**) and<br />
+sum (+ or -). As the parameter for curvature and torsion, always use <code>s_</code>,<br />
+which will also be the resulting curve length. An example using only the required argument is<br />
+<code>python plot_from_k_and_t.py (1+s_)**-1-1/10*(0.1+(15-s_)**2)**-0.5</code>,<br />
+for which the resulting plot resembles a cresting wave. Note that you cannot use whitespace inside your arguments,<br />
+as argparse interprets it as a delimiter between different arguments. You can also note that even though<br />
+the curvature explodes near <em>s = -1</em>, the script successfully plots a curve. This behaviour allows more freedom<br />
+to the user, but care must be taken as the resulting curves cannot be accurate in cases where kappa or tau are<br />
+badly defined. Moreover, in contrast to the true Frenet frame this script can calculate paths<br />
+with 0 and negative curvatures successfully, but the resulting plots cannot be guaranteed to represent<br />
+anything meaningful (do they really?).<br />
+<strong>If the user desires to approximate an actual Frenet frame, they need to ensure that the curvature satisfies kappa &gt; 0.</strong><br />
+Additionally you can use <a href="https://numpy.org/doc/stable/reference/routines.math.html">mathematical functions defined by numpy</a><br />
+by typing <code>np.[function]([input expressions])</code>, for example <code>np.sin(10*s_)</code>.<br />
+The most important optional argument is <code>--tau</code>, torsion of the curve at point <em>s</em>. When specifying<br />
+optional arguments, the syntax is <code>--[name of argument] [argument value]</code>, for example <code>--tau 5*s_</code>.<br />
+If unspecified, the script will plot a curve with 0 torsion in R<sup>3 space.<br />
+With the limits argument you can specify the interval *c: (a,b) -&gt; R</sup>3*<br />
+with the syntax <code>--limits [a] [b]</code>.<br />
+You can also ensure the curve is not distorted by different scales on the x, y and z axes<br />
+by specifying the argument <code>--equal_scaling</code>.</p>
+<h2 id="examples">Examples</h2>
+<p>input:
+<code>python plot_from_k_and_t.py 1 --tau 0.25 --equal_scaling</code><br />
+output:<br />
+<img src="https://user-images.githubusercontent.com/81294037/137204561-6ed2f864-a7ef-423b-8775-287aba4b8b86.png" alt="helix1" /><br />
+input:
+<code>python plot_from_k_and_t.py s_</code><br />
+output:<br />
+<img src="https://user-images.githubusercontent.com/81294037/137204859-c1063cc9-07a3-4453-9317-bc238e9e5860.png" alt="eulerspiral1" /><br />
+input:
+<code>python plot_from_k_and_t.py 10*np.sin(np.exp(s_)/5) --tau abs(s_) --limits -5 5</code><br />
+output:<br />
+<img src="https://user-images.githubusercontent.com/81294037/137205925-c884ceac-78af-4c3e-b14e-ce77f490f9ea.png" alt="weirdcurve" /></p>
